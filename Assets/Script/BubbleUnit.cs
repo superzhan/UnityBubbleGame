@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class BubbleUnit : MonoBehaviour {
 
-	public Sprite sp;
+	public CircleCollider2D collider;
 
 	public enum BubbleType
 	{
@@ -21,7 +21,7 @@ public class BubbleUnit : MonoBehaviour {
 	public SpriteRenderer bubbleSpriteRen;
 	// Use this for initialization
 	void Start () {
-	
+		this.collider = GetComponent<CircleCollider2D> ();
 	}
 	
    public void SetData(int ID)
@@ -29,6 +29,11 @@ public class BubbleUnit : MonoBehaviour {
 		bubbleType = (BubbleType)ID;
 		Sprite curSprite = SpriteManager.Instance.GetSprite ( bubbleType.ToString());
 		bubbleSpriteRen.sprite = curSprite;
+	}
+
+	void OnMouseDown() {
+		Debug.Log (bubbleType.ToString());
+		BubbleManager.Instance.Clean (this);
 	}
 
 
