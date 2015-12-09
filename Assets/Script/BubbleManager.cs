@@ -47,6 +47,7 @@ public class BubbleManager : MonoBehaviour {
 			int i=0;
 			while(i<linkList.Count)
 			{
+				EffectPool.Instance.Play("BubbleExplode",linkList[i].transform.position);
 				bubbleList.Remove(linkList[i]);
 				Destroy(linkList[i].gameObject);
 				++i;
