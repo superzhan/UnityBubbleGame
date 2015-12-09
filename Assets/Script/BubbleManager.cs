@@ -84,7 +84,7 @@ public class BubbleManager : MonoBehaviour {
 			int j=0;
 			while(j<tempList.Count)
 			{
-				if(curBub.collider.IsTouching(tempList[j].collider))
+				if(curBub.bubCollider.IsTouching(tempList[j].bubCollider))
 				{
 					resList.Add(tempList[j]);
 					tempList.RemoveAt(j);
