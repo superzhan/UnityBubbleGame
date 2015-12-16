@@ -14,6 +14,8 @@ public class BubbleManager : MonoBehaviour {
 	void Start () {
 		Instance = this;
 		Init ();
+
+		Debug.Log (BubbleData.Instance.GetSpriteName (11));
 	
 	}
 	
