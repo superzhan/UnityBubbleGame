@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PathologicalGames;
 
 //
 public class BubbleManager : MonoBehaviour {
@@ -11,8 +12,16 @@ public class BubbleManager : MonoBehaviour {
 	public List<BubbleUnit> bubbleList = new List<BubbleUnit>();
 
 
-	void Start () {
+	SpawnPool pool;
+
+
+	void Awake()
+	{
 		Instance = this;
+	}
+
+	void Start () {
+		pool = PoolManager.Pools["BubblePool"];
 		Init ();
 
 		Debug.Log (BubbleData.Instance.GetSpriteName (11));
@@ -27,35 +36,52 @@ public class BubbleManager : MonoBehaviour {
 	void Init()
 	{
 		for (int i=0; i<60; ++i) {
-			GameObject newBubble = (GameObject)Instantiate (bubblePrefab);
-			newBubble.transform.parent = transform;
-
-			int randonID = Random.Range (0, 5);
-			BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
-			bubble.SetData (randonID);
-			bubbleList.Add(bubble);
-
-			Vector3 randPos = new Vector3 (-2f+3*Random.value,4.1f+2*Random.value,0f);
-			newBubble.transform.localPosition = randPos;
+			CreateNewRandomBubble();
 		}
 	}
 
+    public void CreateNewRandomBubble()
+	{
+		Transform newBubble = pool.Spawn("BubbleUnit");
+		newBubble.parent = transform;
+		
+		int randonID = Random.Range (0, 5);
+		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
+		bubble.SetData (randonID);
+		bubbleList.Add(bubble);
+		
+		Vector3 randPos = new Vector3 (-2f+3*Random.value,4.1f+2*Random.value,0f);
+		newBubble.transform.localPosition = randPos;
+	}
 
+
+	/// <summary>
+	/// 触发游戏的消除
+	/// </summary>
+	/// <param name="bubble">Bubble.</param>
 	public void Clean(BubbleUnit bubble)
 	{
 		List<BubbleUnit> linkList = GetLinkBubble (bubble);
-		Debug.Log (linkList.Count);
+		int linkCount=linkList.Count;
+
 		if (linkList.Count > 2) {
 			int i=0;
 			while(i<linkList.Count)
 			{
 				EffectPool.Instance.Play("BubbleExplode",linkList[i].transform.position);
 				bubbleList.Remove(linkList[i]);
-				Destroy(linkList[i].gameObject);
+				pool.Despawn(linkList[i].transform);
 				++i;
+			}
+
+
+			for (int k=0; k<linkCount; ++k) {
+				CreateNewRandomBubble();
 			}
 		
 		}
+
+
 	}
 
 
