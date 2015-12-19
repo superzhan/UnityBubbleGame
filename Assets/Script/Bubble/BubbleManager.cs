@@ -45,7 +45,7 @@ public class BubbleManager : MonoBehaviour {
 		Transform newBubble = pool.Spawn("BubbleUnit");
 		newBubble.parent = transform;
 		
-		int randonID = Random.Range (0, 5);
+		int randonID =10+ Random.Range (1, 6);
 		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
@@ -68,9 +68,7 @@ public class BubbleManager : MonoBehaviour {
 			int i=0;
 			while(i<linkList.Count)
 			{
-				EffectPool.Instance.Play("BubbleExplode",linkList[i].transform.position);
-				bubbleList.Remove(linkList[i]);
-				pool.Despawn(linkList[i].transform);
+				RecycleBubble(linkList[i]);
 				++i;
 			}
 
@@ -78,10 +76,22 @@ public class BubbleManager : MonoBehaviour {
 			for (int k=0; k<linkCount; ++k) {
 				CreateNewRandomBubble();
 			}
-		
+		}
+	}
+
+	/// <summary>
+	/// 回收一个泡泡
+	/// </summary>
+	/// <param name="bubble">Bubble.</param>
+	public void RecycleBubble(BubbleUnit bubble)
+	{
+		if (bubbleList.Contains (bubble) == false) {
+			return;
 		}
 
-
+		EffectPool.Instance.Play("BubbleExplode",bubble.transform.position);
+		bubbleList.Remove(bubble);
+		pool.Despawn(bubble.transform);
 	}
 
 
@@ -100,7 +110,7 @@ public class BubbleManager : MonoBehaviour {
 		//remove different bubble
 		int index = 0;
 		while (index <tempList.Count) {
-		    if(tempList[index].bubbleType != bubble.bubbleType)
+		    if(IDTool.GetTypeID( tempList[index].ID ) != IDTool.GetTypeID( bubble.ID))
 			{
 				tempList.RemoveAt(index);
 			}else
@@ -136,6 +146,12 @@ public class BubbleManager : MonoBehaviour {
 		return resList;
 	}
 
+	/// <summary>
+	/// 判断两个泡泡是否相连
+	/// </summary>
+	/// <returns><c>true</c> if this instance is touch the specified a b; otherwise, <c>false</c>.</returns>
+	/// <param name="a">The alpha component.</param>
+	/// <param name="b">The blue component.</param>
 	bool IsTouch(BubbleUnit a, BubbleUnit b)
 	{
 		float distance = Vector3.Distance (a.transform.localPosition, b.transform.localPosition);
@@ -153,4 +169,14 @@ public class BubbleManager : MonoBehaviour {
 		}
 	}
 
+	private void ClearSameColorBubble()
+	{
+
+	}
+
+
+	private void CleanAllBubble()
+	{
+
+	}
 }
