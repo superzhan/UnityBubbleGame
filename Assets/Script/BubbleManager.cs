@@ -58,6 +58,12 @@ public class BubbleManager : MonoBehaviour {
 		}
 	}
 
+
+	/// <summary>
+	/// 广度优先搜索 查找相连的 泡泡
+	/// </summary>
+	/// <returns>The link bubble.</returns>
+	/// <param name="bubble">Bubble.</param>
 	List<BubbleUnit> GetLinkBubble(BubbleUnit bubble)
 	{
 		List<BubbleUnit> resList = new List<BubbleUnit> ();
@@ -87,7 +93,7 @@ public class BubbleManager : MonoBehaviour {
 			int j=0;
 			while(j<tempList.Count)
 			{
-				if(curBub.bubCollider.IsTouching(tempList[j].bubCollider))
+				if( IsTouch(curBub,tempList[j]) )
 				{
 					resList.Add(tempList[j]);
 					tempList.RemoveAt(j);
@@ -102,6 +108,23 @@ public class BubbleManager : MonoBehaviour {
 		   
 		}
 		return resList;
+	}
+
+	bool IsTouch(BubbleUnit a, BubbleUnit b)
+	{
+		float distance = Vector3.Distance (a.transform.localPosition, b.transform.localPosition);
+
+		float radiusA = a.bubCollider.radius;
+		float radiusB = b.bubCollider.radius;
+
+		float offset = 0.05f;
+
+		float calDistance = radiusA + radiusB + offset;
+		if (calDistance >= distance) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

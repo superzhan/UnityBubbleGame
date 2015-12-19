@@ -31,6 +31,9 @@ public class BubbleUnit : MonoBehaviour {
 		bubbleSpriteRen.sprite = curSprite;
 	}
 
+	/// <summary>
+	/// Raises the mouse down event.
+	/// </summary>
 	void OnMouseDown() {
 		Debug.Log (bubbleType.ToString());
 		BubbleManager.Instance.Clean (this);
