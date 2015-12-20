@@ -89,8 +89,8 @@ public class SpecialBubbleUnit : BubbleUnit {
 
 
 
-		left.DOMoveX (-3f, 0.8f).SetEase(Ease.Linear);
-		right.DOMoveX (3f, 0.8f).SetEase(Ease.Linear).OnComplete(CleanCollider);
+		left.DOMoveX (-300f, 0.8f).SetEase(Ease.Linear);
+		right.DOMoveX (300f, 0.8f).SetEase(Ease.Linear).OnComplete(CleanCollider);
 
 	}
 
@@ -116,8 +116,8 @@ public class SpecialBubbleUnit : BubbleUnit {
 		
 		
 		
-		up.DOMoveY (5f, 0.8f).SetEase(Ease.Linear);
-		down.DOMoveY (-5f, 0.8f).SetEase(Ease.Linear).OnComplete(CleanCollider);
+		up.DOMoveY (500f, 0.8f).SetEase(Ease.Linear);
+		down.DOMoveY (-500f, 0.8f).SetEase(Ease.Linear).OnComplete(CleanCollider);
 	}
 
 	/// <summary>

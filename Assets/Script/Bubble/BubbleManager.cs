@@ -45,7 +45,7 @@ public class BubbleManager : MonoBehaviour {
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
 		
-		Vector3 randPos = new Vector3 (-2f+2*Random.value,4.1f+2*Random.value,0f);
+		Vector3 randPos = new Vector3 (-200f+200*Random.value,410f+200*Random.value,0f);
 		newBubble.transform.localPosition = randPos;
 	}
 
