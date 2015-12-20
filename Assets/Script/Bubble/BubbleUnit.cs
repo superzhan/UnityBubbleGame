@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// Bubble unit.
@@ -10,10 +11,13 @@ public class BubbleUnit : MonoBehaviour {
 	public int ID = 0;
 	public int SingleScore = 0;
 
+	public int hitCount =1;
+
+
 
 	public CircleCollider2D bubCollider;
 
-	public SpriteRenderer bubbleSpriteRen;
+	public Image bubbleImage;
 	
 	// Use this for initialization
 	void Start () {
@@ -27,7 +31,7 @@ public class BubbleUnit : MonoBehaviour {
 
 		string spriteName = BubbleData.Instance.GetSpriteName (ID);
 		Sprite curSprite = SpriteManager.Instance.GetSprite (spriteName);
-		bubbleSpriteRen.sprite = curSprite;
+		bubbleImage.sprite = curSprite;
 	}
 
 	/// <summary>
@@ -35,6 +39,11 @@ public class BubbleUnit : MonoBehaviour {
 	/// </summary>
 	void OnMouseDown() {
 		BubbleManager.Instance.Clean (this);
+	}
+
+	public void ReduceHitCount()
+	{
+		hitCount -= 1;
 	}
 
 

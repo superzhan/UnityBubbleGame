@@ -37,15 +37,15 @@ public class BubbleManager : MonoBehaviour {
 
     public void CreateNewRandomBubble()
 	{
-		Transform newBubble = pool.Spawn("SpecialBubbleUnit");
+		Transform newBubble = pool.Spawn("BubbleUnit");
 		newBubble.parent = transform;
 		
-		int randonID =20+ Random.Range (1, 7);
+		int randonID =10+ Random.Range (1, 6);
 		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
 		
-		Vector3 randPos = new Vector3 (-2f+3*Random.value,4.1f+2*Random.value,0f);
+		Vector3 randPos = new Vector3 (-2f+2*Random.value,4.1f+2*Random.value,0f);
 		newBubble.transform.localPosition = randPos;
 	}
 
@@ -63,6 +63,7 @@ public class BubbleManager : MonoBehaviour {
 			int i=0;
 			while(i<linkList.Count)
 			{
+				linkList[i].ReduceHitCount();
 				RecycleBubble(linkList[i]);
 				++i;
 			}
@@ -81,6 +82,10 @@ public class BubbleManager : MonoBehaviour {
 	public void RecycleBubble(BubbleUnit bubble)
 	{
 		if (bubbleList.Contains (bubble) == false) {
+			return;
+		}
+
+		if (bubble.hitCount > 0) {
 			return;
 		}
 

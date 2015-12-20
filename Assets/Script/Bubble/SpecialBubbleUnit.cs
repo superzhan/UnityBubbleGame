@@ -139,7 +139,7 @@ public class SpecialBubbleUnit : BubbleUnit {
 		range.localPosition = Vector3.zero;
 		range.gameObject.SetActive (true);
 		tempColliderList.Add (range);
-		rangeCollider.transform.DOShakePosition (0.2f, new Vector3 (0.01f, 0.01f, 0f)).OnComplete (CleanCollider);
+		rangeCollider.transform.DOShakePosition (0.2f, new Vector3 (1f, 1f, 0f)).OnComplete (CleanCollider);
 	}
 
 	private void CleanCollider()
