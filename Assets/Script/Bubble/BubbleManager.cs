@@ -33,20 +33,42 @@ public class BubbleManager : MonoBehaviour {
 		for (int i=0; i<60; ++i) {
 			CreateNewRandomBubble();
 		}
+
+		CreateStoneBubble ();
 	}
 
     public void CreateNewRandomBubble()
 	{
-		Transform newBubble = pool.Spawn("FreezeBubbleUnit");
+		Transform newBubble = pool.Spawn("BubbleUnit");
 		newBubble.parent = transform;
 		
-		int randonID =30+ Random.Range (1, 6);
+		int randonID =10+ Random.Range (1, 6);
 		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
 		
 		Vector3 randPos = new Vector3 (-200f+400*Random.value,410f+200*Random.value,0f);
 		newBubble.transform.localPosition = randPos;
+	}
+
+	void CreateStoneBubble()
+	{
+		Vector3 startPos = new Vector3 (-210f,-210f, 0);
+		float len = 52f;
+		for (int i=0; i<5; ++i) {
+		   
+			Transform newBubble = pool.Spawn("StoneBubbleUnit");
+			newBubble.parent = transform;
+			
+			int randonID =40+ Random.Range (1, 6);
+			BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
+			bubble.SetData (randonID);
+			bubbleList.Add(bubble);
+
+			Vector3 pos = startPos + new Vector3(i*len,0f,0f);
+			bubble.transform.localPosition = pos;
+
+		}
 	}
 
 
@@ -167,7 +189,7 @@ public class BubbleManager : MonoBehaviour {
 		float radiusA = a.bubCollider.radius;
 		float radiusB = b.bubCollider.radius;
 
-		float offset = 0.05f;
+		float offset = 5f;
 
 		float calDistance = radiusA + radiusB + offset;
 		if (calDistance >= distance) {
