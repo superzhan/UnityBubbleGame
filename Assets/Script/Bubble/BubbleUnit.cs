@@ -19,10 +19,7 @@ public class BubbleUnit : MonoBehaviour {
 
 	public Image bubbleImage;
 	
-	// Use this for initialization
-	void Start () {
-		this.bubCollider = GetComponent<CircleCollider2D> ();
-	}
+
 	
    public virtual void SetData(int ID)
 	{
@@ -41,7 +38,7 @@ public class BubbleUnit : MonoBehaviour {
 		BubbleManager.Instance.Clean (this);
 	}
 
-	public void ReduceHitCount()
+	public virtual void ReduceHitCount()
 	{
 		hitCount -= 1;
 	}
