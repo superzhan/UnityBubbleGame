@@ -12,6 +12,10 @@ public class SpecialCheckCollider : MonoBehaviour {
    
 	void OnTriggerEnter2D(Collider2D other) {
 
+		if (bubble == null) {
+			bubble = GetComponentInParent<SpecialBubbleUnit> ();
+		}
+
 	     if (other.CompareTag ("Bubble")) {
 			bubble.DealEffectCleanBubble(other.GetComponent<BubbleUnit>());
 		}

@@ -4,11 +4,12 @@ ID,SpriteName,DesName,SingleScore
 13,BlueBubble,普通泡泡,10
 14,OrangeBubble,普通泡泡,10
 15,GreenBubble,普通泡泡,10
-21,ColBubble,纵向消除,100
-22,RowBubble,横向消除,100
+21,RowBubble,横向消除,100
+22,ColBubble,纵向消除,100
 23,RowColBubble,十字消除,100
 24,BombBubble,范围炸弹,100
-25,FullBubble,全屏炸弹,100
+25,ColorBubble,同色消除,100
+26,FullBubble,全屏炸弹,100
 31,YellowBubble,结冰泡泡,150
 32,RedBubble,结冰泡泡,150
 33,BlueBubble,结冰泡泡,150

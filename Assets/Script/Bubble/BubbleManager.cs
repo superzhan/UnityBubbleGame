@@ -9,6 +9,8 @@ public class BubbleManager : MonoBehaviour {
 	public static BubbleManager Instance = null;
 	public GameObject bubblePrefab;
 
+
+	//当前的泡泡
 	public List<BubbleUnit> bubbleList = new List<BubbleUnit>();
 
 
@@ -23,15 +25,8 @@ public class BubbleManager : MonoBehaviour {
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
 		Init ();
-
-		Debug.Log (BubbleData.Instance.GetSpriteName (11));
-	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void Init()
 	{
@@ -42,10 +37,10 @@ public class BubbleManager : MonoBehaviour {
 
     public void CreateNewRandomBubble()
 	{
-		Transform newBubble = pool.Spawn("BubbleUnit");
+		Transform newBubble = pool.Spawn("SpecialBubbleUnit");
 		newBubble.parent = transform;
 		
-		int randonID =10+ Random.Range (1, 6);
+		int randonID =20+ Random.Range (1, 7);
 		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
@@ -169,14 +164,45 @@ public class BubbleManager : MonoBehaviour {
 		}
 	}
 
-	private void ClearSameColorBubble()
+
+	/// <summary>
+	/// 特殊泡泡的功能 消除同样颜色的泡泡
+	/// </summary>
+	public void ClearSameColorBubble(BubbleUnit bubble)
 	{
+		int typeID = Random.Range (1, 6);
+
+		List<BubbleUnit> colorBubList = new List<BubbleUnit> ();
+
+		for (int i=0; i<this.bubbleList.Count; ++i) {
+			BubbleUnit curBub= bubbleList[i];
+			int curType = IDTool.GetType(curBub.ID);
+			int curTypeID = IDTool.GetTypeID(curBub.ID);
+
+			if( curType !=2 && curTypeID == typeID)
+			{
+				colorBubList.Add(curBub);
+			}
+		}
+
+		colorBubList.Add (bubble);
+
+		for (int j=0; j<colorBubList.Count; ++j) {
+			RecycleBubble(colorBubList[j]);
+		}
 
 	}
 
-
-	private void CleanAllBubble()
+	/// <summary>
+	/// 特殊泡泡效果 全屏消除
+	/// </summary>
+	public void CleanAllBubble()
 	{
+		List<BubbleUnit> tempBubbleList = new List<BubbleUnit> ();
+		tempBubbleList.AddRange (bubbleList);
 
+		for (int i=0; i<tempBubbleList.Count; ++i) {
+			RecycleBubble(tempBubbleList[i]);
+		}
 	}
 }
