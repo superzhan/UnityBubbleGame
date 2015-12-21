@@ -7,7 +7,6 @@ using PathologicalGames;
 public class BubbleManager : MonoBehaviour {
 
 	public static BubbleManager Instance = null;
-	public GameObject bubblePrefab;
 
 
 	//当前的泡泡
@@ -24,7 +23,8 @@ public class BubbleManager : MonoBehaviour {
 
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
-		Init ();
+		//Init ();
+		InitByLayoutData ();
 	}
 	
 
@@ -240,4 +240,70 @@ public class BubbleManager : MonoBehaviour {
 			RecycleBubble(tempBubbleList[i]);
 		}
 	}
+
+	#region
+
+	public string layoutData="";
+	public List<BubbleConfigStruct> layoutList = new List<BubbleConfigStruct>();
+
+	public void InitByLayoutData()
+	{
+		string[] items = layoutData.Split ('|');
+
+		for (int i=0; i<items.Length; ++i) {
+			string oneItem= items[i];
+			string[] itemInfos= oneItem.Split('^');
+			BubbleConfigStruct info= new BubbleConfigStruct();
+			info.id = int.Parse(itemInfos[0]);
+			info.prefabName = itemInfos[1];
+			info.pos= StrToVec(itemInfos[2]);
+			info.rotate= StrToVec(itemInfos[3]);
+			info.scale = StrToVec(itemInfos[4]);
+
+			layoutList.Add(info);
+		}
+
+		for (int j=0; j<layoutList.Count; ++j) {
+			BubbleConfigStruct info = layoutList[j];
+
+			Transform newBubble = GetBubbleTran(info.id);
+			newBubble.parent = transform;
+
+			BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
+			bubble.SetData (info.id);
+			bubbleList.Add(bubble);
+
+			newBubble.transform.localPosition = info.pos;
+			newBubble.transform.localRotation = Quaternion.Euler(info.rotate);
+			newBubble.transform.localScale = info.scale;
+		}
+	}
+
+	Vector3 StrToVec(string str)
+	{
+		string[] strVec = str.Split ('*');
+		Vector3 vec = new Vector3 (float.Parse(strVec[0]),float.Parse(strVec[1]),float.Parse(strVec[2]));
+		return vec;
+	}
+
+	Transform GetBubbleTran(int ID)
+	{
+		int type = IDTool.GetType (ID);
+		if (type == 1) {
+			return pool.Spawn("BubbleUnit");
+		}
+		if (type == 2) {
+			return pool.Spawn("SpecialBubbleUnit");
+		}
+		if (type == 3) {
+			return pool.Spawn("FreezeBubbleUnit");
+		}
+		if (type == 4) {
+			return pool.Spawn("StoneBubbleUnit");
+		}
+
+		return null;
+	}
+
+	#endregion
 }

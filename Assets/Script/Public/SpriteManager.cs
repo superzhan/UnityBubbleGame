@@ -32,6 +32,10 @@ public class SpriteManager : MonoBehaviour {
 			spriteTable.Add(spriteList[i].name,spriteList[i]);
 		}
 	}
+	void Start()
+	{
+		Instance = this;
+	}
 
 
 	public Sprite GetSprite(string name)
@@ -39,6 +43,18 @@ public class SpriteManager : MonoBehaviour {
 		Sprite sp = (Sprite)spriteTable [name];
 		//Debug.Log (spriteTable.Count);
 		return sp;
+	}
+
+	public Sprite GetSpriteInEditor(string name)
+	{
+		for (int i=0; i<spriteList.Count; ++i) {
+			if(name == spriteList[i].name)
+			{
+				return spriteList[i];
+			}
+		}
+
+		return null;
 	}
 
 
