@@ -25,14 +25,14 @@ public class BubbleManager : MonoBehaviour {
 
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
-		//Init ();
-		if (testLayoutData != "") {
-			layoutData = testLayoutData;
-		} else {
-			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
-		}
-
-		InitByLayoutData (layoutData);
+		Init ();
+//		if (testLayoutData != "") {
+//			layoutData = testLayoutData;
+//		} else {
+//			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
+//		}
+//
+//		InitByLayoutData (layoutData);
 	}
 
 
