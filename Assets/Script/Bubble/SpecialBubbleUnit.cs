@@ -16,6 +16,7 @@ public class SpecialBubbleUnit : BubbleUnit {
 
 	public override void SetData (int ID)
 	{
+		GetComponent<Rigidbody2D>().isKinematic = false;	
 		base.SetData (ID);
 
 	}
@@ -64,6 +65,7 @@ public class SpecialBubbleUnit : BubbleUnit {
 				BubbleManager.Instance.CleanAllBubble();
 			}
 		    
+			GetComponent<Rigidbody2D>().isKinematic = true;	
 		}
 	}
 

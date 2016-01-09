@@ -25,16 +25,18 @@ public class BubbleManager : MonoBehaviour {
 
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
-		//Init ();
-		if (testLayoutData != "") {
-			layoutData = testLayoutData;
-		} else {
-			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
-		}
-
-		InitByLayoutData (layoutData);
+		Init ();
+//		if (testLayoutData != "") {
+//			layoutData = testLayoutData;
+//		} else {
+//			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
+//		}
+//
+//		InitByLayoutData (layoutData);
 	}
-	
+
+
+	#region  TestCode
 
 	void Init()
 	{
@@ -47,10 +49,12 @@ public class BubbleManager : MonoBehaviour {
 
     public void CreateNewRandomBubble()
 	{
-		Transform newBubble = pool.Spawn("BubbleUnit");
-		newBubble.parent = transform;
+
 		
-		int randonID =10+ Random.Range (1, 6);
+		int randonID =Random.Range(1,3)*10+ Random.Range (1, 6);
+		Transform newBubble = GetBubbleTran (randonID);
+		newBubble.parent = transform;
+
 		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
@@ -65,10 +69,12 @@ public class BubbleManager : MonoBehaviour {
 		float len = 52f;
 		for (int i=0; i<5; ++i) {
 		   
-			Transform newBubble = pool.Spawn("StoneBubbleUnit");
-			newBubble.parent = transform;
-			
+
 			int randonID =40+ Random.Range (1, 6);
+
+			Transform newBubble = GetBubbleTran (randonID);
+			newBubble.parent = transform;
+
 			BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 			bubble.SetData (randonID);
 			bubbleList.Add(bubble);
@@ -79,6 +85,7 @@ public class BubbleManager : MonoBehaviour {
 		}
 	}
 
+	#endregion
 
 	/// <summary>
 	/// 触发游戏的消除
