@@ -25,14 +25,14 @@ public class BubbleManager : MonoBehaviour {
 
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
-		Init ();
-//		if (testLayoutData != "") {
-//			layoutData = testLayoutData;
-//		} else {
-//			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
-//		}
-//
-//		InitByLayoutData (layoutData);
+		//Init ();
+		if (testLayoutData != "") {
+			layoutData = testLayoutData;
+		} else {
+			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
+		}
+
+		InitByLayoutData (layoutData);
 	}
 
 
@@ -51,7 +51,7 @@ public class BubbleManager : MonoBehaviour {
 	{
 
 		
-		int randonID =Random.Range(1,3)*10+ Random.Range (1, 6);
+		int randonID =10+ Random.Range (1, 6);
 		Transform newBubble = GetBubbleTran (randonID);
 		newBubble.parent = transform;
 
@@ -93,10 +93,16 @@ public class BubbleManager : MonoBehaviour {
 	/// <param name="bubble">Bubble.</param>
 	public void Clean(BubbleUnit bubble)
 	{
+		Vector3 bubPos = bubble.transform.localPosition;
+
+
+
+		//clean bubble
 		List<BubbleUnit> linkList = GetLinkBubble (bubble);
 
-		int recycleCount = 0;
+		CreateSpecialBubble(linkList.Count,bubPos);
 
+		int recycleCount = 0;
 		if (linkList.Count > 2) {
 			int i=0;
 			while(i<linkList.Count)
@@ -109,8 +115,6 @@ public class BubbleManager : MonoBehaviour {
 
 				RecycleBubble(linkList[i]);
 				++i;
-
-
 			}
 
 
@@ -118,6 +122,44 @@ public class BubbleManager : MonoBehaviour {
 				CreateNewRandomBubble();
 			}
 		}
+
+
+
+	}
+
+	/// <summary>
+	/// 消除多个泡泡生成特殊泡泡
+	/// </summary>
+	void CreateSpecialBubble(int cleanCount,Vector3 pos)
+	{
+		if (cleanCount < 4) {
+			return;
+		}
+
+		Transform bub;
+		int randomID=21;
+		if (cleanCount == 4) {
+			randomID = 20 + Random.Range (1, 3);
+		
+		} else if (cleanCount == 5) {
+			randomID = 24;
+		} else if (cleanCount == 6) {
+			randomID = 23;
+		} else if (7 <= cleanCount && cleanCount <= 9) {
+			randomID = 25;
+		} else   {
+			randomID =26;
+		}
+
+		bub = GetBubbleTran (randomID);
+		BubbleUnit bubble = bub.GetComponent<BubbleUnit> ();
+		bubble.SetData (randomID);
+
+		bub.transform.parent = transform;
+		bub.transform.localPosition = pos;
+
+		bubbleList.Add (bubble);
+
 	}
 
 	/// <summary>

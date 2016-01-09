@@ -60,9 +60,13 @@ public class SpecialBubbleUnit : BubbleUnit {
 			}else if(typeID ==5)
 			{
 				BubbleManager.Instance.ClearSameColorBubble(this);
+				this.ReduceHitCount ();
+				BubbleManager.Instance.RecycleBubble (this);
 			}else if(typeID ==6 )
 			{
 				BubbleManager.Instance.CleanAllBubble();
+				this.ReduceHitCount ();
+				BubbleManager.Instance.RecycleBubble (this);
 			}
 		    
 			GetComponent<Rigidbody2D>().isKinematic = true;	
