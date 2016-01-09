@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using PathologicalGames;
 
-//
+/// <summary>
+/// 泡泡的管理类 
+/// </summary>
 public class BubbleManager : MonoBehaviour {
 
 	public static BubbleManager Instance = null;
@@ -24,7 +26,13 @@ public class BubbleManager : MonoBehaviour {
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
 		//Init ();
-		InitByLayoutData ();
+		if (testLayoutData != "") {
+			layoutData = testLayoutData;
+		} else {
+			layoutData = BubbleLayoutData.Instance.GetData (bubbleLayoutID);
+		}
+
+		InitByLayoutData (layoutData);
 	}
 	
 
@@ -243,12 +251,18 @@ public class BubbleManager : MonoBehaviour {
 
 	#region
 
-	public string layoutData="";
+	public int bubbleLayoutID=0;
+	public string testLayoutData="";
+	private string layoutData="";
 	public List<BubbleConfigStruct> layoutList = new List<BubbleConfigStruct>();
 
-	public void InitByLayoutData()
+	/// <summary>
+	/// 根据配置文件 初始化泡泡布置
+	/// </summary>
+	public void InitByLayoutData(string layoutStr)
 	{
-		string[] items = layoutData.Split ('|');
+
+		string[] items = layoutStr.Split ('|');
 
 		for (int i=0; i<items.Length; ++i) {
 			string oneItem= items[i];
