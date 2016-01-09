@@ -23,7 +23,8 @@ public class SpecialBubbleUnit : BubbleUnit {
 
 	public void DealEffectCleanBubble(BubbleUnit bubble)
 	{
-		//Debug.Log (bubble.name);
+		Debug.Log (bubble.name);
+		bubble.ReduceHitCount ();
 		BubbleManager.Instance.RecycleBubble(bubble);
 	}
 
@@ -149,6 +150,7 @@ public class SpecialBubbleUnit : BubbleUnit {
 		}
 		tempColliderList.Clear ();
 
+		this.ReduceHitCount ();
 		BubbleManager.Instance.RecycleBubble (this);
 	}
 

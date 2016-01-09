@@ -17,7 +17,12 @@ public class SpecialCheckCollider : MonoBehaviour {
 		}
 
 	     if (other.CompareTag ("Bubble")) {
-			bubble.DealEffectCleanBubble(other.GetComponent<BubbleUnit>());
+			BubbleUnit otherBubble = other.GetComponent<BubbleUnit>();
+			if(otherBubble != null)
+			{
+				bubble.DealEffectCleanBubble(otherBubble);
+			}
+
 		}
 	}
 
