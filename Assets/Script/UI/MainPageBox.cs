@@ -13,6 +13,10 @@ public class MainPageBox : UIBoxBase {
 	
 	}
 
+	public override void ShowBox ()
+	{
+		gameObject.SetActive (true);
+	}
 
 
     public void OnStartGameClick()

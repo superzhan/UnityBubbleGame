@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour {
 
 	public GameObject Black;
 
+	public bool isPause=false;
+
 	#region Define UIBox
 	public GameObject mainPageBox;
 	public GameObject recordBox;
