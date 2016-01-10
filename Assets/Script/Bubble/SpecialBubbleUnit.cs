@@ -45,6 +45,8 @@ public class SpecialBubbleUnit : BubbleUnit {
 			return;
 		} else {
 
+			BubbleManager.Instance.scoreMulti=2f;
+
 			if(typeID ==1)
 			{
 				CleanRow();

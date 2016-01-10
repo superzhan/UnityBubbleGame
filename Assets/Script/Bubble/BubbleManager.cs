@@ -14,6 +14,23 @@ public class BubbleManager : MonoBehaviour {
 	//当前的泡泡
 	public List<BubbleUnit> bubbleList = new List<BubbleUnit>();
 
+	public delegate void ScoreChangeEvent(int scoreValue);
+	public ScoreChangeEvent scoreChangeEvent;
+
+	private int _score = 0;
+	public int score{
+		get{return _score;}
+		set{
+			_score = value;
+			if(scoreChangeEvent != null)
+			{
+				scoreChangeEvent(_score);
+			}
+		}
+	}
+	public float scoreMulti =1;
+
+
 
 	SpawnPool pool;
 
@@ -41,6 +58,9 @@ public class BubbleManager : MonoBehaviour {
 
 	public void InitGame()
 	{
+		this.score = 0;
+		this.scoreMulti = 1;
+
 		for (int i=0; i<bubbleList.Count; ++i) {
 			pool.Despawn(bubbleList[i].transform);
 		}
@@ -133,6 +153,7 @@ public class BubbleManager : MonoBehaviour {
 		List<BubbleUnit> linkList = GetLinkBubble (bubble);
 
 		CreateSpecialBubble(linkList.Count,bubPos);
+		SetScoreMulti (linkList.Count);
 
 		int recycleCount = 0;
 		if (linkList.Count > 2) {
@@ -149,9 +170,28 @@ public class BubbleManager : MonoBehaviour {
 				++i;
 			}
 		}
+	}
 
+	void SetScoreMulti(int linkCount)
+	{
+		if (linkCount <= 3) {
+			this.scoreMulti = 1;
 
+		} else if (linkCount == 4) {
+			this.scoreMulti =1.5f;
 
+		}else if (linkCount == 5) {
+			this.scoreMulti =2f;
+
+		}else if (linkCount == 6) {
+			this.scoreMulti =2.5f;
+
+		}else if (7<=linkCount && linkCount <=9) {
+			this.scoreMulti =3f;
+
+		}else {
+			this.scoreMulti =4f;
+		}
 	}
 
 	/// <summary>
@@ -203,12 +243,16 @@ public class BubbleManager : MonoBehaviour {
 			return;
 		}
 
+		this.score += (int)( bubble.SingleScore * this.scoreMulti);
+
 		EffectPool.Instance.Play("BubbleExplode",bubble.transform.position);
 		bubbleList.Remove(bubble);
 		pool.Despawn(bubble.transform);
 
 		Transform newBubble = CreateNewRandomBubble ();
 		newBubble.transform.localPosition = new Vector3 (-200f+Random.value*400,450f,0f);
+
+
 	}
 
 

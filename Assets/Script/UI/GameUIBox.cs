@@ -1,14 +1,18 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameUIBox : UIBoxBase {
 
 	public Text scoreText;
 	public Text timeText;
 
+
 	public int totalTime = 90;
 	private float timeCal=0;
+
+	private int scoreTemp=0;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +28,29 @@ public class GameUIBox : UIBoxBase {
 	{
 		this.gameObject.SetActive (true);
 		StartCoroutine ("TimeDown");
+
+		BubbleManager.Instance.scoreChangeEvent += ScoreChange;
 	} 
+
+	public override void HideBox ()
+	{
+		base.HideBox ();
+
+		BubbleManager.Instance.scoreChangeEvent -= ScoreChange;
+	}
+
+
+	void ScoreChange(int score)
+	{
+		DOTween.To (() => this.scoreTemp, x => this.scoreTemp = x, score, 0.6f).OnUpdate (ScoreChangeUpdate);;
+	}
+	void ScoreChangeUpdate()
+	{
+		scoreText.text = this.scoreTemp.ToString ();
+	}
+
+
+
 
 	public void OnPauseBtnClick()
 	{
