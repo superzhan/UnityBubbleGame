@@ -25,6 +25,8 @@ public class MainPageBox : UIBoxBase {
 		UIManager.Instance.HideBox (UIBoxType.MainPageBox);
 		UIManager.Instance.ShowBox (UIBoxType.GameBox);
 		UIManager.Instance.ShowBox (UIBoxType.GameUIBox);
+
+		BubbleManager.Instance.InitGame ();
 	}
 	public void OnAboutClick()
 	{

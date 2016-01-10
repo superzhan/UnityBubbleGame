@@ -14,7 +14,7 @@ public class FreezeBubbleUnit : BubbleUnit {
 	{
 		base.SetData (ID);
 
-		hitCount = Random.Range (2, 6);
+		hitCount = 2;// Random.Range (2, 6);
 		HitText.text = hitCount.ToString ();
 
 		freezeImg.gameObject.SetActive(true);

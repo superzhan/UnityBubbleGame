@@ -25,7 +25,6 @@ public class BubbleManager : MonoBehaviour {
 
 	void Start () {
 		pool = PoolManager.Pools["BubblePool"];
-		Init ();
 //		if (testLayoutData != "") {
 //			layoutData = testLayoutData;
 //		} else {
@@ -36,31 +35,64 @@ public class BubbleManager : MonoBehaviour {
 	}
 
 
+
+
 	#region  TestCode
 
-	void Init()
+	public void InitGame()
 	{
-		for (int i=0; i<60; ++i) {
-			CreateNewRandomBubble();
+		for (int i=0; i<bubbleList.Count; ++i) {
+			pool.Despawn(bubbleList[i].transform);
 		}
+		bubbleList.Clear ();
 
-		CreateStoneBubble ();
+		List<Transform> list = new List<Transform> ();
+		for (int i=0; i<80; ++i) {
+			Transform tran= CreateNewRandomBubble();
+			list.Add(tran);
+		}
+		SortView (list);
+
+		//CreateStoneBubble ();
 	}
 
-    public void CreateNewRandomBubble()
+    public Transform CreateNewRandomBubble()
 	{
 
-		
-		int randonID =10+ Random.Range (1, 6);
+		int type = Random.value > 0.9 ? 30 : 10;
+
+		int randonID =type+ Random.Range (1, 6);
+		//Debug.Log (randonID);
 		Transform newBubble = GetBubbleTran (randonID);
 		newBubble.parent = transform;
 
 		BubbleUnit bubble=newBubble.GetComponent<BubbleUnit> ();
 		bubble.SetData (randonID);
 		bubbleList.Add(bubble);
+
+		return newBubble;
+	}
+
+	void SortView(List<Transform> trans)
+	{
+		float len = 55f;
+		int x = 1;
+		int y = 0;
+		Vector3 startPos = new Vector3 (-205f, -350f, 0);
 		
-		Vector3 randPos = new Vector3 (-200f+400*Random.value,410f+200*Random.value,0f);
-		newBubble.transform.localPosition = randPos;
+		int i = 1;
+		while (i<trans.Count) {
+			trans[i].localPosition = startPos + new Vector3(x*len,y*len,0);
+			
+			++x;
+			++i;
+			
+			if(x>=8)
+			{
+				x=0;
+				y+=1;
+			}
+		}
 	}
 
 	void CreateStoneBubble()
@@ -115,11 +147,6 @@ public class BubbleManager : MonoBehaviour {
 
 				RecycleBubble(linkList[i]);
 				++i;
-			}
-
-
-			for (int k=0; k<recycleCount; ++k) {
-				CreateNewRandomBubble();
 			}
 		}
 
@@ -179,6 +206,9 @@ public class BubbleManager : MonoBehaviour {
 		EffectPool.Instance.Play("BubbleExplode",bubble.transform.position);
 		bubbleList.Remove(bubble);
 		pool.Despawn(bubble.transform);
+
+		Transform newBubble = CreateNewRandomBubble ();
+		newBubble.transform.localPosition = new Vector3 (-200f+Random.value*400,450f,0f);
 	}
 
 
@@ -351,6 +381,10 @@ public class BubbleManager : MonoBehaviour {
 
 	Transform GetBubbleTran(int ID)
 	{
+		if (pool == null) {
+			pool = PoolManager.Pools["BubblePool"];
+		}
+
 		int type = IDTool.GetType (ID);
 		if (type == 1) {
 			return pool.Spawn("BubbleUnit");
