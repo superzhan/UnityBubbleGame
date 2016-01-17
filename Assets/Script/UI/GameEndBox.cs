@@ -1,16 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
+/// <summary>
+/// 游戏结束
+/// </summary>
 public class GameEndBox : UIBoxBase {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public Text scoreTx;
+	public Text hightScoreTx;
+
+
+
+	public override void ShowBox ()
+	{
+		base.ShowBox ();
+
+		int score = BubbleManager.Instance.score;
+		scoreTx.text = score.ToString();
+
+		PlayerData.Instance.AddGameTimes ();
+		PlayerData.Instance.AddRecord (score);
+
+		int hightestScore = PlayerData.Instance.GetHightestScore ();
+		hightScoreTx.text = hightestScore.ToString();
 	}
 
 	public void OnPlayAgainBtnClick()

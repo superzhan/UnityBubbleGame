@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour {
 	void Awake()
 	{
 		Instance = this;
+		PlayerData.Instance.Init ();
 	}
 
 	public GameObject Black;
