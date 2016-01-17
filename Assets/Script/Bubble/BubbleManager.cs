@@ -67,7 +67,7 @@ public class BubbleManager : MonoBehaviour {
 		bubbleList.Clear ();
 
 		List<Transform> list = new List<Transform> ();
-		for (int i=0; i<80; ++i) {
+		for (int i=0; i<100; ++i) {
 			Transform tran= CreateNewRandomBubble();
 			list.Add(tran);
 		}
