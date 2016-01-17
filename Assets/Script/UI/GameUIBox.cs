@@ -7,6 +7,7 @@ public class GameUIBox : UIBoxBase {
 
 	public Text scoreText;
 	public Text timeText;
+	public Text hightestText;
 
 
 	public int totalTime = 90;
@@ -30,6 +31,8 @@ public class GameUIBox : UIBoxBase {
 		StartCoroutine ("TimeDown");
 
 		BubbleManager.Instance.scoreChangeEvent += ScoreChange;
+
+		hightestText.text = PlayerData.Instance.GetHightestScore ().ToString();
 	} 
 
 	public override void HideBox ()

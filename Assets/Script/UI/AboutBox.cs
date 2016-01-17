@@ -15,6 +15,7 @@ public class AboutBox : UIBoxBase {
 
 	public void OnCloseBtnClick()
 	{
+		Debug.Log ("about Close");
 		UIManager.Instance.HideBox (UIBoxType.AboutBox);
 	}
 }
