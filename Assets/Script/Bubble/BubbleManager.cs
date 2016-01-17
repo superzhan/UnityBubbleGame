@@ -30,7 +30,8 @@ public class BubbleManager : MonoBehaviour {
 	}
 	public float scoreMulti =1;
 
-
+	[HideInInspector]
+	public bool isCanClick= true;
 
 	SpawnPool pool;
 
@@ -67,7 +68,7 @@ public class BubbleManager : MonoBehaviour {
 		bubbleList.Clear ();
 
 		List<Transform> list = new List<Transform> ();
-		for (int i=0; i<100; ++i) {
+		for (int i=0; i<90; ++i) {
 			Transform tran= CreateNewRandomBubble();
 			list.Add(tran);
 		}

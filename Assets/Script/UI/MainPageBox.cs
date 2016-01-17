@@ -27,6 +27,7 @@ public class MainPageBox : UIBoxBase {
 		UIManager.Instance.ShowBox (UIBoxType.GameUIBox);
 
 		BubbleManager.Instance.InitGame ();
+		BubbleManager.Instance.isCanClick = true;
 	}
 	public void OnAboutClick()
 	{

@@ -35,6 +35,10 @@ public class SpecialBubbleUnit : BubbleUnit {
 	/// </summary>
 	void OnMouseDown() {
 
+		if (BubbleManager.Instance.isCanClick == false) {
+			return;
+		}
+
 		Debug.Log ("special monsedown");
 
 		int type = IDTool.GetType (ID);

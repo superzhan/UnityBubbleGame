@@ -35,6 +35,9 @@ public class FreezeBubbleUnit : BubbleUnit {
 	/// Raises the mouse down event.
 	/// </summary>
 	void OnMouseDown() {
+		if (BubbleManager.Instance.isCanClick == false) {
+			return;
+		}
 		BubbleManager.Instance.Clean (this);
 	}
 }

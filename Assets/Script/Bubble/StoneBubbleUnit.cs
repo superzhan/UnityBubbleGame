@@ -25,6 +25,9 @@ public class StoneBubbleUnit : BubbleUnit {
 	}
 
 	void OnMouseDown() {
+		if (BubbleManager.Instance.isCanClick == false) {
+			return;
+		}
 		//BubbleManager.Instance.Clean (this);
 	}
 }

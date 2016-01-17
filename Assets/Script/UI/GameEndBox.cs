@@ -16,6 +16,8 @@ public class GameEndBox : UIBoxBase {
 	{
 		base.ShowBox ();
 
+		BubbleManager.Instance.isCanClick = false;
+
 		int score = BubbleManager.Instance.score;
 		scoreTx.text = score.ToString();
 
