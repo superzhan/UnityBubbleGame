@@ -253,7 +253,7 @@ public class BubbleManager : MonoBehaviour {
 		Transform newBubble = CreateNewRandomBubble ();
 		newBubble.transform.localPosition = new Vector3 (-200f+Random.value*400,450f,0f);
 
-
+		AudioManager.Instance.PlayBubble ();
 	}
 
 

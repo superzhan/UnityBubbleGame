@@ -7,5 +7,6 @@ public class PauseBox : UIBoxBase {
 	{
 		UIManager.Instance.HideBox (UIBoxType.PauseBox);
 		UIManager.Instance.isPause = false;
+		AudioManager.Instance.ButtonClick ();
 	}
 }

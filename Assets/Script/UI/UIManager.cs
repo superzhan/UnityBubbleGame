@@ -39,8 +39,7 @@ public class UIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Init ();
-
-		AudioController.PlayMusic ("UIMusic");
+		AudioManager.Instance.PlayMusic ("UIMusic");
 	}
 
 	private void Init()

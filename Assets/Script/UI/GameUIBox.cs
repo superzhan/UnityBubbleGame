@@ -33,6 +33,8 @@ public class GameUIBox : UIBoxBase {
 		BubbleManager.Instance.scoreChangeEvent += ScoreChange;
 
 		hightestText.text = PlayerData.Instance.GetHightestScore ().ToString();
+
+		AudioManager.Instance.PlayMusic ("GameMusic");
 	} 
 
 	public override void HideBox ()
@@ -59,6 +61,8 @@ public class GameUIBox : UIBoxBase {
 	{
 		UIManager.Instance.ShowBox (UIBoxType.PauseBox);
 		UIManager.Instance.isPause = true;
+
+		AudioManager.Instance.ButtonClick ();
 	}
 
 

@@ -35,5 +35,7 @@ public class GameEndBox : UIBoxBase {
 		UIManager.Instance.HideBox (UIBoxType.GameBox);
 		UIManager.Instance.HideBox (UIBoxType.GameUIBox);
 		UIManager.Instance.ShowBox (UIBoxType.MainPageBox);
+
+		AudioManager.Instance.ButtonClick ();
 	}
 }
