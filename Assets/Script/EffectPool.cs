@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using PathologicalGames;
-
+using DG.Tweening;
 /// <summary>
 /// 特效池
 /// </summary>
@@ -68,6 +68,28 @@ public class EffectPool : MonoBehaviour {
 		}
 
 		Play (effectName,pos);
+
+	}
+
+	public void PlayFlowEffect(Vector3 pos)
+	{
+		StartCoroutine (IEPlayFlowEffect(pos));
+	}
+	IEnumerator IEPlayFlowEffect(Vector3 pos)
+	{
+		Transform particleTran = pool.Spawn ("FlowEffect");
+
+		ParticleSystem particle = particleTran.GetComponent<ParticleSystem> ();
+
+		
+		particleTran.position = pos;
+		particle.Play ();
+
+		particleTran.DOMove (new Vector3 (-200, 360, 0f), 0.7f);
+
+		yield return  new WaitForSeconds (1f);
+
+		pool.Despawn (particleTran);
 
 	}
 }

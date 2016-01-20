@@ -257,6 +257,7 @@ public class BubbleManager : MonoBehaviour {
 		this.score += (int)( bubble.SingleScore * this.scoreMulti);
 
 		EffectPool.Instance.PlayBubbleExplode(IDTool.GetTypeID(bubble.ID),bubble.transform.position);
+		EffectPool.Instance.PlayFlowEffect (bubble.transform.position);
 
 		bubbleList.Remove(bubble);
 		pool.Despawn(bubble.transform);
