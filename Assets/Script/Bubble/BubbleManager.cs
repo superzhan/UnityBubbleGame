@@ -156,6 +156,13 @@ public class BubbleManager : MonoBehaviour {
 		CreateSpecialBubble(linkList.Count,bubPos);
 		SetScoreMulti (linkList.Count);
 
+		StartCoroutine (IECleanBubble(linkList));
+	}
+
+	IEnumerator IECleanBubble(List<BubbleUnit> linkList)
+	{
+
+		isCanClick = false;
 		int recycleCount = 0;
 		if (linkList.Count > 2) {
 			int i=0;
@@ -166,11 +173,14 @@ public class BubbleManager : MonoBehaviour {
 				{
 					recycleCount++;
 				}
-
+				
 				RecycleBubble(linkList[i]);
 				++i;
+				yield return new WaitForSeconds(0.1f);
 			}
 		}
+
+		isCanClick = true;
 	}
 
 	void SetScoreMulti(int linkCount)
