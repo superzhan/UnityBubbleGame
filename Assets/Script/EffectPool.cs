@@ -49,4 +49,25 @@ public class EffectPool : MonoBehaviour {
 		yield return new WaitForSeconds(time +0.1f);
 		pool.Despawn (particle.transform);
 	}
+
+	public void PlayBubbleExplode(int type, Vector3 pos)
+	{
+		string effectName = "";
+	    if (type == 1) {
+			effectName = "BubbleExplodeYellow";
+		} else  if (type == 2) {
+			effectName = "BubbleExplodeRed";
+		} else  if (type == 3) {
+			effectName = "BubbleExplodeBlue";
+		} else  if (type == 4) {
+			effectName = "BubbleExplodeOrange";
+		} else  if (type == 5) {
+			effectName = "BubbleExplodeGreen";
+		} else {
+			effectName = "BubbleExplodeGreen";
+		}
+
+		Play (effectName,pos);
+
+	}
 }
