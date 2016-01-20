@@ -380,7 +380,7 @@ public class BubbleManager : MonoBehaviour {
 		List<BubbleUnit> tempBubbleList = new List<BubbleUnit> ();
 		tempBubbleList.AddRange (bubbleList);
 
-		for (int i=0; i<tempBubbleList.Count; ++i) {
+		for (int i=0; i<tempBubbleList.Count/3; ++i) {
 			RecycleBubble(tempBubbleList[i]);
 		}
 	}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MainPageBox : UIBoxBase {
 
@@ -9,7 +10,10 @@ public class MainPageBox : UIBoxBase {
 	// Use this for initialization
 	void Start () {
 	
+
 	}
+
+
 	
 	// Update is called once per frame
 	void Update () {
