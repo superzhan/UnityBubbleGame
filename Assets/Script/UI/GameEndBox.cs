@@ -10,7 +10,7 @@ public class GameEndBox : UIBoxBase {
 	public Text scoreTx;
 	public Text hightScoreTx;
 
-
+	private int adTime=0;
 
 	public override void ShowBox ()
 	{
@@ -26,6 +26,30 @@ public class GameEndBox : UIBoxBase {
 
 		int hightestScore = PlayerData.Instance.GetHightestScore ();
 		hightScoreTx.text = hightestScore.ToString();
+
+
+#if UNITY_EDITOR
+		return;
+
+#endif
+
+#if UNITY_ANDROID
+
+//		if(adTime%2==0)
+//			return;
+//
+//		adTime++;
+
+		Debug.Log("Call Add");
+		//show add
+		AndroidJavaClass androidJC;
+		AndroidJavaObject androidJO;
+		androidJC = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+		androidJO = androidJC.GetStatic<AndroidJavaObject>("currentActivity");
+		
+		androidJO.Call("CallAd");
+#endif
+
 	}
 
 	public void OnPlayAgainBtnClick()
