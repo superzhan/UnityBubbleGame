@@ -1,13 +1,11 @@
 ##《天天萌泡泡》
    **《天天萌泡泡》**是一款简单好玩的消除游戏，点击三个或以上同颜色、相连接的泡泡来进行消除，简单而有趣。
    
-![img](./README/s1.png)
 
    
 #### **游戏玩法：**
 类似消灭星星的玩法，点击三个或以上同颜色、相连接的泡泡进行消除。 一次消除的元素越多，就会产生越厉害的特殊泡泡。点击特殊泡泡能大量消除其他泡泡，获得更高的分数。游戏是限时模式。
 
-![img](./README/s2.png)
 
 #### 开始
 运行Scene/MainScene 场景开始游戏。**开发环境是unity5.2.3 ,低版本的unity可能会报错。**
@@ -18,6 +16,7 @@
 	UI: UGUI
 	插件: 2dtoolkit, poolManger, AudioToolkit, DOTween
 	资源：网络素材+PS修改
+	使用Unity内置的物理引擎
 	
 #### 工程结构
 	Scene目录 工程只有一个场景MainScene,从这里开始游戏。
@@ -27,6 +26,8 @@
 	Audio目录 声音文件
 	Resources目录 存放游戏的配置数据
 	其他目录 插件和部分资源
-	
+
+![img](./README/s1.png)
+![img](./README/s2.png)
 ![img](./README/s3.png)
 
