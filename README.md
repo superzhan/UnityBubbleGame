@@ -6,6 +6,10 @@
 #### **游戏玩法：**
 类似消灭星星的玩法，点击三个或以上同颜色、相连接的泡泡进行消除。 一次消除的元素越多，就会产生越厉害的特殊泡泡。点击特殊泡泡能大量消除其他泡泡，获得更高的分数。游戏是限时模式。
 
+#### 游戏下载
+[**腾讯应用宝下载地址:** http://android.myapp.com/myapp/detail.htm?apkName=com.superzhan.bubblegame](http://android.myapp.com/myapp/detail.htm?apkName=com.superzhan.bubblegame)
+
+[游戏下载 腾讯应用宝下载地址](http://www.superzhan.cn/wp-content/uploads/2016/03/%E5%A4%A9%E5%A4%A9%E8%90%8C%E6%B3%A1%E6%B3%A1.apk)
 
 #### 开始
 运行Scene/MainScene 场景开始游戏。**开发环境是unity5.2.3 ,低版本的unity可能会报错。**
