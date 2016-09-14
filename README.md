@@ -11,6 +11,8 @@
 
 [游戏下载 腾讯应用宝下载地址](http://www.superzhan.cn/wp-content/uploads/2016/03/%E5%A4%A9%E5%A4%A9%E8%90%8C%E6%B3%A1%E6%B3%A1.apk)
 
+[WebGL 展示地址 https://build.cloud.unity3d.com/share/W1jjk3nJtZ/webgl/](https://build.cloud.unity3d.com/share/W1jjk3nJtZ/webgl/)
+
 #### 开始
 运行Scene/MainScene 场景开始游戏。**开发环境是unity5.2.3 ,低版本的unity可能会报错。**
 
