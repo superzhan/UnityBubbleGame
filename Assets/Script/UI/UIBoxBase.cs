@@ -14,8 +14,8 @@ public class UIBoxBase : MonoBehaviour {
 
 	public virtual void ShowBox()
 	{
-		this.gameObject.SetActive (true);
-		this.transform.localScale = Vector3.zero;
+		this.gameObject.SetActive (true);		//Active Game Object
+		this.transform.localScale = Vector3.zero;	// make size 0
 		transform.DOScale (1, 0.3f).SetEase (Ease.OutBounce).OnComplete(ShowBoxFinish);
 	}
 
